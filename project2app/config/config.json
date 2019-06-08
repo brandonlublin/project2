@@ -2,14 +2,14 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "q&a_db",
+    "database": "devquestions_db",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": null,
-    "database": "q&a_db",
+    "database": "questions_db",
     "host": "localhost",
     "dialect": "mysql",
     "logging": false
