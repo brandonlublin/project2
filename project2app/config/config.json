@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "Kuan93017",
     "database": "devquestions_db",
     "host": "localhost",
     "dialect": "mysql"
