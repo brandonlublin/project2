@@ -1,14 +1,14 @@
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "Zonahawk26!",
     "database": "devquestions_db",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "Zonahawk26!",
     "database": "questions_db",
     "host": "localhost",
     "dialect": "mysql",
