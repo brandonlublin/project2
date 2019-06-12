@@ -1,3 +1,17 @@
+body {
+  background-color: #ffa76c;
 .list-group-item {
   line-height: 2.5;
 }
+
+.container {
+  position: relative;
+  width: 100%;
+}
+
+#home-jumbotron {
+  position: absolute;
+  width: 75%;
+  left: 50%;
+  transform: translate(-50%, 25%);
+} 
