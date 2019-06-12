@@ -1,5 +1,5 @@
-DROP DATABASE IF EXISTS questions_db;
-CREATE DATABASE questions_db;
+CREATE DATABASE kebab_db;
 
-DROP DATABASE IF EXISTS devquestions_db;
-CREATE DATABASE devquestions_db;
+DROP DATABASE IF EXISTS devkebab_db;
+CREATE DATABASE devkebab_db;
+
