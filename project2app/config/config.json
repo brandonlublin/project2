@@ -4,7 +4,8 @@
     "password": "Kuan93017",
     "database": "devquestions_db",
     "host": "localhost",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "port": 3306
   },
   "test": {
     "username": "root",

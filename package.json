@@ -26,5 +26,15 @@
     "eslint-plugin-prettier": "^3.1.0",
     "mocha": "^6.1.4",
     "prettier": "^1.17.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandonlublin/project2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/brandonlublin/project2/issues"
+  },
+  "homepage": "https://github.com/brandonlublin/project2#readme"
 }
