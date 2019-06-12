@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // // Get references to page elements, update this session once front end has decide the id
+=======
+// // Get references to page elements
+>>>>>>> 3e87cb0983ac7ffbbdc908ff915f478dbcdc17a5
 // var $exampleText = $("#example-text");
 // var $exampleDescription = $("#example-description");
 // var $submitBtn = $("#submit");
