@@ -1,5 +1,7 @@
 body {
   background-color: #ffa76c;
+.list-group-item {
+  line-height: 2.5;
 }
 
 .container {
@@ -12,4 +14,4 @@ body {
   width: 75%;
   left: 50%;
   transform: translate(-50%, 25%);
-}
+} 
