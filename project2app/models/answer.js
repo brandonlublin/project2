@@ -1,13 +1,13 @@
 module.exports = function(sequelize, DataTypes) {
   var Answer = sequelize.define("Answer", {
-    text: {
+    userAnswer: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
-    description: DataTypes.TEXT
+    username: DataTypes.STRING
   });
 
   Answer.associate = function(models) {
