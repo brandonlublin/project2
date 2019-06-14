@@ -5,7 +5,7 @@ CREATE DATABASE questions_db;
 CREATE DATABASE devquestions_db;
 
 use devquestions_db;
-Create the table in the specified schema
+-- Create the table in the specified schema
 CREATE TABLE questions (
     id int NOT NULL AUTO_INCREMENT,
     question varchar(300) NOT NULL,
