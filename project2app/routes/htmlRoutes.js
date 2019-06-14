@@ -6,26 +6,34 @@ module.exports = function(app) {
     res.render("index");
   });
 
-  app.get("/question", function(req, res) {
-    db.Question.findOne({}).then(function(dbQuestions) {
-      // res.json(dbQuestions);
-      res.render("Question", {
-        text: dbQuestions.text
-      });
-    });
+  app.get("/username", function(req, res) {
+      res.render("username");
 
-    db.Answer.create({
-      text: "Test",
-      description: "Brandon",
-      include: ["Questions"]
+    // db.Answer.create({
+    //   userAnswer: "Test",
+    //   username: "Brandon",
+    //   include: ["Questions"]
+    // });
+  });
+  
+  app.get("/question", function(req, res) {
+    db.Question.findAll({}).then(function(dbQuestions) {
+      let questionObj = {
+        questions: []
+      }
+      dbQuestions.forEach(function(question) {
+        questionObj.questions.push(question.dataValues)
+        console.log(question.dataValues);
+        
+      })
+      res.render("Question", questionObj);
     });
   });
 
-  // Load example page and pass in an example by id
   app.get("/answers", function(req, res) {
-    db.Answer.findOne({}).then(function(dbAnswer) {
+    db.Answer.findAll({}).then(function(dbAnswer) {
       res.render("Answers", {
-        example: dbAnswer
+        userAnswer: dbAnswer.userAnswer
       });
     });
   });

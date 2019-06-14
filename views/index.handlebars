@@ -1,9 +1,39 @@
-<div class="container">
+<div style="margin-top: 10%">
   <div class="jumbotron text-center" id="home-jumbotron">
-    <h1 class="display-4">KEBÄBbb</h1>
+    <h1 class="display-6">KEBÄBbb</h1>
     <p class="lead"><i>A Trivia Experience</i></p>
     <hr class="my-4">
     <p>Gather your friends and click start!</p>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Start Game</a>
+    <div class="container" id="mario-chat">
+    <div id="chat-window">
+        <div id="output"></div>
+        <div id="feedback"></div>
+    </div>
+    <form id="usernameForm">
+      <input id="username" type="text" placeholder="Username" required />
+    
+      {{!-- <a id="joinGame" class="btn btn-primary btn-lg" href="/question">Join Game</a> --}}
+      <button id="submit" class="btn">Submit</button>
+    </form>
+    
+    </div>
   </div>
 </div>
+
+<script>
+  $("#submit").on("click", function(event) {
+    event.preventDefault();
+    console.log('click')
+    let userName = $("#username").val().trim();
+    if (userName !== '' && userName.length > 0) {
+      var user = {
+        username: userName
+      }
+      $.post("/api/user", user, function(response) {
+        console.log(response);
+      })
+    }
+  })
+</script>
+
+{{!-- <script src="../../project2app/public/js/chat.js"></script> --}}
