@@ -9,7 +9,7 @@ body{
 }
 
 #appTitle {
-  font-size: 50pt;
+  font-size: 60pt;
   font-family: 'Righteous', cursive;
 }
 
@@ -19,6 +19,10 @@ body{
 
 #tagline {
   font-size: 13pt;
+}
+#submit {
+  margin: 0px;
+  margin-top: 1rem;
 }
 
 #home-jumbotron {
@@ -41,4 +45,27 @@ body{
 
 #submit:focus {
   background-color: tomato;
+}
+
+#question-jumbotron {
+  position: absolute;
+  margin-bottom: 0px;
+  width: 100%;
+  left: 50%;
+  transform: translate(-50%,18%)
+}
+#gameTitle {
+  font-size: 35pt;
+  font-family: Righteous,cursive
+}
+#userQuestion {
+  font-size: 30pt;
+  text-align: center
+}
+#smallInput {
+  width: 45%;
+}
+#userAnswer:focus {
+  border-bottom: 1px solid tomato;
+  box-shadow: 0 1px 0 0 tomato
 }

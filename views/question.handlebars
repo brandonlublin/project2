@@ -1,13 +1,14 @@
-<div class="container">
-    <div class="jumbotron text-center" id="home-jumbotron">
-        <h1 class="display-6" id="gameTitle">KEBÄB</h1>
-        <p id="tagline">Please read the prompt. Enter your best fake answer below!</p>
-        <hr class="my-4">
-        <h1 style="margin-top: 5%">here it is{{questions}}</h1>
-        <div class="container">
-            <form id="usernameForm">
-                <input id="username" type="text" placeholder="Username" required />
+{{!-- where users view the question that they're answering --}}
 
+<div class="container">
+    <div class="jumbotron text-center" id="question-jumbotron">
+        <h1 class="display-6" id="gameTitle">KEBÄB</h1>
+        <p id="tagline">Fill in the blank below with your best fake answer!</p>
+        <hr class="my-4">
+        <h1 id="userQuestion">{{questions}}</h1><br>
+        <div class="container" id="smallInput">
+            <form id="userAnswerForm">
+                <input id="userAnswer" type="text" placeholder="Enter your answer here" required />
                 <a id="submit" class="waves-effect waves-light btn" href="/answerChoice">Submit</a>
             </form>
         </div>
