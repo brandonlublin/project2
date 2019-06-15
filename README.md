@@ -1,16 +1,15 @@
-# project2
-This is group project number 2
-## KEBÄBbb: A Trivia Experience
-###### Group Project #2
+# Project 2
 
-Fibbage type application that uses chat amongst players so you can have teams and play on your own computer. **Our mvp is just the game itself.** 
-- If you don’t know what fibbage is, it’s like a multiplayer trivia game that you play on your own computer
+## KEBÄB: A Trivia Experience
+
+This is a Fibbage-inspired application that you can play on your own computer. **Our mvp is just the game itself.** 
+- If you don’t know what Fibbage is, it’s a multiplayer trivia-esque game that you play can play with a group.
 
 ### Team Members
-- Gabbi Stein - PM
-- Stephen Cheng - 
-- Brandon Lublin - 
-- Kurtis Santillanes -
+- Gabbi Stein - PM/Front-End Development
+- Stephen Cheng - Front-End jQuery/Sessions
+- Brandon Lublin - Sequelize/Models/Database Integration
+- Kurtis Santillanes - Sessions/Socket.io
 
 ### New tech
 - Use Colyseus for multiplayer gameplay
