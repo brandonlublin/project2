@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(express.static(__dirname + "/project2app/public"));
 app.use(express.static(path.join(__dirname, "/project2app/public")));
 
+
 // Handlebars
 app.engine(
   "handlebars",
