@@ -2,11 +2,10 @@ var Sequelize = require("sequelize")
 module.exports = function(sequelize, DataTypes) {
   var Game = sequelize.define('Game', {
     userIds: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
-    triviaIds: {
-        type: DataTypes.STRING
-      },
+    triviaIds: DataTypes.STRING,
     userCount: {
       type: DataTypes.INTEGER,
       defaultValue: 0

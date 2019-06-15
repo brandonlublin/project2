@@ -17,15 +17,18 @@ module.exports = function(app) {
   });
   
   app.get("/question", function(req, res) {
-    db.Question.findAll({}).then(function(dbQuestions) {
+    db.Trivia.findAll({}).then(function(dbQuestions) {
       let questionObj = {
         questions: []
       }
-      dbQuestions.forEach(function(question) {
+      var randomIndex = Math.floor(Math.random() * dbQuestions.length); 
+      dbQuestions.forEach(function(question, i) {
         questionObj.questions.push(question.dataValues)
-        console.log(question.dataValues);
-        
       })
+      // console.log(questionObj.questions[randomIndex]);
+      questionObj.questions.splice(randomIndex)
+      console.log(questionObj.questions);
+      
       res.render("Question", questionObj);
     });
   });

@@ -39,12 +39,12 @@ module.exports = function(app) {
           trivia.forEach(function(question) {
             triviaIds.push(question.dataValues.id);
           })
-          // let triviaGameIds = [];
-          // while (counter < 4) {
-          //   let index = Math.floor(Math.random() * (4 - 1))
-          //   let id = triviaIds[index];
-          //   triviaGameIds.push(id);
-          // }
+          let triviaGameIds = [];
+          while (counter < 4) {
+            let index = Math.floor(Math.random() * (4 - 1))
+            let id = triviaIds[index];
+            triviaGameIds.push(id);
+          }
           triviaIds = triviaIds.toString()
 
           
@@ -75,7 +75,7 @@ module.exports = function(app) {
           username: req.body.username,
           gameId: game.dataValues.id
         }).then(function(newUser) {
-          console.log(newUser);
+          // console.log(newUser);
           userIds = userIds + newUser.dataValues.id;
           db.Game.update({ //we want to append the user id to the existing string of user ids (look into appending onto the end of a value in sequelize)
             userIds: userIds,
@@ -83,7 +83,7 @@ module.exports = function(app) {
               id: game.dataValues.id
             }
           }).then(function(updatedGame) {
-            console.log(updatedGame.dataValues);
+
             
           })
         })
