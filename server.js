@@ -2,7 +2,8 @@ require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
 var db = require("./project2app/models");
-var socket = require('socket.io');
+var socket = require("socket.io");
+var path = require("path");
 var server;
 
 var app = express();
@@ -11,7 +12,8 @@ var PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static(__dirname + "public"));
+app.use(express.static(__dirname + "/project2app/public"));
+app.use(express.static(path.join(__dirname, "/project2app/public")));
 
 // Handlebars
 app.engine(
@@ -57,7 +59,7 @@ if (process.env.NODE_ENV === "test") {
 db.sequelize.sync(syncOptions).then(function () {
   server = app.listen(PORT, function () {
     console.log(
-      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
+      "==> 🌎 Listening on port %s. Visit http://localhost:%s/ in your browser.",
       PORT,
       PORT
     );
