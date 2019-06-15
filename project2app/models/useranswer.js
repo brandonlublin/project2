@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Answer = sequelize.define("Answer", {
+  var UserAnswer = sequelize.define("UserAnswer", {
     userAnswer: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -10,17 +10,22 @@ module.exports = function(sequelize, DataTypes) {
     username: DataTypes.STRING
   });
 
-  Answer.associate = function(models) {
-    Answer.belongsTo(models.Question, {
+  UserAnswer.associate = function(models) {
+    UserAnswer.belongsTo(models.Trivia, {
       foreignKey: {
         allowNull: false
       }
     });
-    Answer.belongsTo(models.User, {
+    UserAnswer.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+    UserAnswer.belongsTo(models.Game, {
       foreignKey: {
         allowNull: false
       }
     });
   };
-  return Answer;
+  return UserAnswer;
 };
