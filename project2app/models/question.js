@@ -1,9 +1,11 @@
 module.exports = function(sequelize, DataTypes) {
   var Question = sequelize.define("Question", {
     text: {
-      type: DataTypes.STRING,
-      allowNull: false
+      Question: DataTypes.STRING,
+      allowNull: true
     }
   });
   return Question;
+
+  //Need to insert sample into question table
 };

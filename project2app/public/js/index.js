@@ -6,22 +6,25 @@ var $exampleList = $("#example-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveExample: function(example) {
+  // Need this save function to save user input data into answer table
+  saveExample: function(answer) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
       url: "api/examples",
-      data: JSON.stringify(example)
+      data: JSON.stringify(answer)
     });
   },
-  getExamples: function() {
+  // Use this function to get question from question table
+  getQuestions: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/questions",
       type: "GET"
     });
   },
+  // do not need a delete function
   deleteExample: function(id) {
     return $.ajax({
       url: "api/examples/" + id,
@@ -30,9 +33,9 @@ var API = {
   }
 };
 
-
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshExamples = function() {
+  // Get user input answer and selection the refresh to the next page
   API.getExamples().then(function(data) {
     var $examples = data.map(function(example) {
       var $a = $("<a>")
