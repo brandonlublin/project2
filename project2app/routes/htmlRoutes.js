@@ -21,21 +21,31 @@ module.exports = function(app) {
       let questionObj = {
         questions: []
       }
-      var randomIndex = Math.floor(Math.random() * dbQuestions.length); 
-      dbQuestions.forEach(function(question, i) {
+      var randomIndex = Math.floor(Math.random() * dbQuestions.length - 1); 
+      dbQuestions.forEach(function(question) {
         questionObj.questions.push(question.dataValues)
       })
-      // console.log(questionObj.questions[randomIndex]);
+      // console.log("random question: " + JSON.stringify(questionObj.questions[randomIndex]));
       questionObj.questions.splice(randomIndex)
-      console.log(questionObj.questions);
-      
+      // console.log(questionObj.questions);
+      // console.log("Question obj: " + JSON.stringify(questionObj));
       res.render("Question", questionObj);
+    });
+    
+    
+  });
+
+  app.get("/answerChoice", function(req, res) {
+    db.UserAnswer.findAll({}).then(function(dbAnswer) {
+      res.render("AnswerChoice", {
+        userAnswer: dbAnswer.userAnswer
+      });
     });
   });
 
-  app.get("/answers", function(req, res) {
-    db.Answer.findAll({}).then(function(dbAnswer) {
-      res.render("Answers", {
+  app.get("/roundResults", function(req, res) {
+    db.UserAnswer.findAll({}).then(function(dbAnswer) {
+      res.render("RoundResults", {
         userAnswer: dbAnswer.userAnswer
       });
     });
