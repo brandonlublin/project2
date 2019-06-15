@@ -1,36 +1,32 @@
-<div style="margin-top: 10%">
+<div class="container">
   <div class="jumbotron text-center" id="home-jumbotron">
-    <h1 class="display-6">KEBÄB</h1>
-    <p class="lead"><i>A Trivia Experience</i></p>
+    <h1 class="display-6" id="appTitle">KEBÄB</h1>
+    <h3 class="lead" id="slogan"><i>A Trivia Experience</i></h3>
     <hr class="my-4">
-    <p>Gather four of your friends and click start!</p>
-    <div class="container" id="mario-chat">
-    {{!-- <div id="chat-window"> --}}
-        <div id="output"></div>
-        <div id="feedback"></div>
-    </div>
-    <form id="usernameForm">
-      <input id="username" type="text" placeholder="Username" required />
-    
-      {{!-- <a id="joinGame" class="btn btn-primary btn-lg" href="/question">Join Game</a> --}}
-      <a id="submit" class="btn" href="/question">Submit</a>
-    </form>
-    
+    <p id="tagline">Gather four friends and click start!</p>
+    <div class="container">
+      <form id="usernameForm">
+        <input id="username" type="text" placeholder="Username" required />
+
+        {{!-- <a id="joinGame" class="btn btn-primary btn-lg" href="/question">Join Game</a> --}}
+        <a id="submit" class="waves-effect waves-light btn">Submit</a>
+      </form>
     </div>
   </div>
 </div>
 
 <script>
-  $("#submit").on("click", function(event) {
-    {{!-- event.preventDefault(); --}}
+  $("#submit").on("click", function (event) {
+    event.preventDefault();
     console.log('click')
     let userName = $("#username").val().trim();
     if (userName !== '' && userName.length > 0) {
       var user = {
         username: userName
       }
-      $.post("/api/user", user, function(response) {
-        console.log(response)
+
+      $.post("/api/user", user, function (response) {
+        console.log(response);
       })
     }
   })

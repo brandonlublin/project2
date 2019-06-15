@@ -1,70 +1,44 @@
 body{
-  background-color: #ffa76c;
-  font-family: 'Nunito';
+  background-color: #99c8d6;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='18' viewBox='0 0 100 18'%3E%3Cpath fill='%233c87c3' fill-opacity='0.4' d='M61.82 18c3.47-1.45 6.86-3.78 11.3-7.34C78 6.76 80.34 5.1 83.87 3.42 88.56 1.16 93.75 0 100 0v6.16C98.76 6.05 97.43 6 96 6c-9.59 0-14.23 2.23-23.13 9.34-1.28 1.03-2.39 1.9-3.4 2.66h-7.65zm-23.64 0H22.52c-1-.76-2.1-1.63-3.4-2.66C11.57 9.3 7.08 6.78 0 6.16V0c6.25 0 11.44 1.16 16.14 3.42 3.53 1.7 5.87 3.35 10.73 7.24 4.45 3.56 7.84 5.9 11.31 7.34zM61.82 0h7.66a39.57 39.57 0 0 1-7.34 4.58C57.44 6.84 52.25 8 46 8S34.56 6.84 29.86 4.58A39.57 39.57 0 0 1 22.52 0h15.66C41.65 1.44 45.21 2 50 2c4.8 0 8.35-.56 11.82-2z'%3E%3C/path%3E%3C/svg%3E");
 }
 
-h2{
-  font-size: 18px;
-  padding: 10px 20px;
-  color: #575ed8;
-}
-
-#mario-chat{
-  max-width: 600px;
-  margin: 30px auto;
-  border: 1px solid #ddd;
-  box-shadow: 1px 3px 5px rgba(0,0,0,0.05);
-  border-radius: 2px;
-}
-
-#chat-window{
-  height: 400px;
-  overflow: auto;
-  background: #f9f9f9;
-}
-
-#output p{
-  padding: 14px 0px;
-  margin: 0 20px;
-  border-bottom: 1px solid #e9e9e9;
-  color: #555;
-}
-
-#feedback p{
-  color: #aaa;
-  padding: 14px 0px;
-  margin: 0 20px;
-}
-
-#output strong{
-  color: #575ed8;
-}
-
-label{
-  box-sizing: border-box;
-  display: block;
-  padding: 10px 20px;
-}
-
-input{
-  padding: 10px 20px;
-  box-sizing: border-box;
-  background: #eee;
-  border: 0;
-  display: block;
+.container {
+  position: relative;
   width: 100%;
-  background: #fff;
-  border-bottom: 1px solid #eee;
-  font-family: Nunito;
-  font-size: 16px;
 }
 
-button{
-  background: #575ed8;
-  color: #fff;
-  font-size: 18px;
-  border: 0;
-  padding: 12px 0;
-  width: 100%;
-  border-radius: 0 0 2px 2px;
+#appTitle {
+  font-size: 50pt;
+  font-family: 'Righteous', cursive;
+}
+
+#slogan {
+  font-size: 16pt;
+}
+
+#tagline {
+  font-size: 13pt;
+}
+
+#home-jumbotron {
+  position: absolute;
+  width: 75%;
+  left: 50%;
+  transform: translate(-50%, 28%);
+}
+
+#username:focus {
+  border-bottom: 1px solid tomato;
+  box-shadow: 0 1px 0 0 tomato;
+}
+
+#submit:hover {
+  background-color: tomato;
+  border: rgba(252, 142, 123, 0.568);
+  box-shadow: 0 1px 0 0 rgb(192, 75, 54);
+}
+
+#submit:focus {
+  background-color: tomato;
 }
