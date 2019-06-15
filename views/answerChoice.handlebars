@@ -1,1 +1,17 @@
-<a id="submit" class="waves-effect waves-light btn" href="/roundResults">Submit</a>
+{{!-- This is the handlebar for the answer choice screen. --}}
+
+<div class="container">
+    <div class="jumbotron text-center" id="question-jumbotron">
+        <h1 class="display-6" id="gameTitle">KEBÄB</h1>
+        <p id="tagline">Pick the correct answer from the options below... choose carefully!</p>
+        <hr class="my-4">
+        <h1 id="userQuestion">{{questions}}</h1><br>
+        <div class="container" id="answerGroup">
+            <a class="waves-effect waves-light btn-large answerButton" id="buttonOne">{{userAnswer}}</a>
+            <a class="waves-effect waves-light btn-large answerButton" id="buttonTwo">{{userAnswer}}</a>
+            <a class="waves-effect waves-light btn-large answerButton" id="buttonThree">{{userAnswer}}</a>
+            <a class="waves-effect waves-light btn-large answerButton" id="buttonFour">{{userAnswer}}</a>
+            <a class="waves-effect waves-light btn-large answerButton" id="buttonFive">{{userAnswer}}</a>
+        </div>
+    </div>
+</div>
