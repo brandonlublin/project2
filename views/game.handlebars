@@ -1,12 +1,26 @@
-{{#each trivia}}
-    <div class="question hide" id={{id}}>
-        <h1>{{triviaText}}</h1>
+{{!-- This is the handlebars file where users view the prompt that they're "answering". --}}
+
+<div class="container">
+    <div class="jumbotron text-center" id="question-jumbotron">
+        <h1 class="display-6" id="gameTitle">KEBÄB</h1>
+        <p id="tagline">Fill in the blank below with your best fake answer!</p>
+        <hr class="my-4">
+        {{#each trivia}}
+            <div class="question" id={{id}}>
+                {{#if @key}}
+                    <h1>{{triviaText}}</h1>
+                {{/if}}
+            </div>
+        {{/each}}
+        <div class="container" id="smallInput">
+            <form id="userAnswerForm">
+                <input id="userAnswer" type="text" placeholder="Enter your answer here" required />
+                <button id="submit" class="waves-effect waves-light btn">Submit</button>
+            </form>
+        </div>
     </div>
-{{/each}}
+</div>
 
 <script>
-    var triviaData = {{{trivia}}}
-    triviaData.forEach(function(data){
-         console.log(data.triviaText)
-    })
+
 </script>
