@@ -8,19 +8,22 @@
     <h3 class="lead" id="slogan"><i>A Trivia Experience</i></h3>
     <hr class="my-4">
     <p id="tagline">Gather four friends and click start!</p>
-    <div class="container">
-      <form id="usernameForm">
-        <input id="username" type="text" placeholder="Enter a username" required />
-
-        {{!-- <a id="joinGame" class="btn btn-primary btn-lg" href="/question">Join Game</a> --}}
-        <a id="submit" class="waves-effect waves-light btn">Submit</a>
-      </form>
+    <div class="container" id="usernameContainer">
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix" id="usernameInput">account_circle</i>
+          <input id="username" type="text" class="validate">
+          <label for="username" id="usernameInput">Enter a username</label>
+          <a id="submit" class="waves-effect waves-light btn" href="/question">Join Game</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
   $("#submit").on("click", function (event) {
+    console.log('click')
     event.preventDefault(); 
     let userName = $("#username").val().trim();
     if (userName !== '' && userName.length > 0) {
