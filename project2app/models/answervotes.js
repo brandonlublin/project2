@@ -3,7 +3,10 @@ module.exports = function(sequelize, DataTypes) {
   var AnswerVotes = sequelize.define('AnswerVote', {
     answerIds: DataTypes.STRING,
     triviaIds: DataTypes.STRING,
-    createdAt: Sequelize.DATE
+    updatedAt: {  
+      type: Sequelize.DATE, 
+      defaultValue: Sequelize.NOW 
+    }
   });
 
   AnswerVotes.associate = function(models) {
