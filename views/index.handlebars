@@ -21,14 +21,13 @@
   </div>
 </div>
 
-<script src="/socket.io/socket.io.js"></script>
 <script>
-  var socket = io();
+  var socket = io
   io.connect('http://localhost');
-  
+
   $("#submit").on("click", function (event) {
     console.log('click')
-    event.preventDefault(); 
+    event.preventDefault();
     let userName = $("#username").val().trim();
     if (userName !== '' && userName.length > 0) {
       var user = {
@@ -36,14 +35,12 @@
       }
       $("#loading .load-msg").text(`Loading ${userName} to game. Hold tight.`);
       $("#loading").removeClass("hide");
-      
+
       $.post("/api/user", user, function (response) {
-      
         window.localStorage.setItem("gameid", response.gameid);
         window.localStorage.setItem("userid", response.userid);
 
-        if(response.status) {
-
+        if (response.status) {
           $("#loading .load-msg").text("");
           $("#loading").addClass("hide");
           // start game redirect user to question page
