@@ -3,9 +3,16 @@ const Sequelize = require("sequelize");
 const op = Sequelize.Op;
 
 module.exports = function(app) {
-  // Get all examples
-  app.get("/api/trivia/:id", function(req, res) {
-    db.Questions.findOne({
+
+  // Get All Questions
+  app.get("/api/Trivia", function(req, res) {
+    db.Trivia.findAll().then(function(getQuestionDb) {
+      res.json(getQuestionDb);
+    });
+  });
+  // Get One Question
+  app.get("/api/Trivia/:id", function(req, res) {
+    db.Trivia.findOne({
       where: {
         id: req.params.id
       }
@@ -13,6 +20,7 @@ module.exports = function(app) {
       res.json(getQuestionDb);
     });
   });
+
   // Create a new example
   app.post("/api/answers", function(req, res) {
     db.Questions.create(req.body).then(function(userAnsDb) {
@@ -26,9 +34,9 @@ module.exports = function(app) {
       where: {
         userCount: { [op.lt] : 6 }
       },
-      order: [[
+      order: [
         "createdAt", "ASC"
-      ]]
+      ]
     }).then(function(game) {
       if (game === null) {
         //query trivia 

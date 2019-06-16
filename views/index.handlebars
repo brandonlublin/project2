@@ -9,7 +9,7 @@
         <input id="username" type="text" placeholder="Username" required />
 
         {{!-- <a id="joinGame" class="btn btn-primary btn-lg" href="/question">Join Game</a> --}}
-        <a id="submit" class="waves-effect waves-light btn">Submit</a>
+        <a id="submit" class="waves-effect waves-light btn" href="/question">Submit</a>
       </form>
     </div>
   </div>
@@ -17,7 +17,7 @@
 
 <script>
   $("#submit").on("click", function (event) {
-    event.preventDefault();
+    // event.preventDefault();
     console.log('click')
     let userName = $("#username").val().trim();
     if (userName !== '' && userName.length > 0) {
@@ -29,7 +29,9 @@
         console.log(response);
       })
     }
-  })
+    
+  }) 
 </script>
+
 
 {{!-- <script src="../../project2app/public/js/chat.js"></script> --}}

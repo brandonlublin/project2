@@ -1,6 +1,6 @@
-var Sequelize = require("sequelize")
+var Sequelize = require("sequelize");
 module.exports = function(sequelize, DataTypes) {
-  var Game = sequelize.define('Game', {
+  var Game = sequelize.define("Game", {
     userIds: {
       type: DataTypes.STRING,
       allowNull: false
