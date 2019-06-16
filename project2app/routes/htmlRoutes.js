@@ -7,13 +7,9 @@ module.exports = function(app) {
   });
 
   app.get("/username", function(req, res) {
-      res.render("username");
-
-    // db.Answer.create({
-    //   userAnswer: "Test",
-    //   username: "Brandon",
-    //   include: ["Questions"]
-    // });
+      res.render("username", {
+        username: req.body.username
+      });
   });
   
   app.get("/question", function(req, res) {
@@ -21,15 +17,20 @@ module.exports = function(app) {
       let questionObj = {
         questions: []
       }
-      var randomIndex = Math.floor(Math.random() * dbQuestions.length - 1); 
+      var randomIndex = Math.floor(Math.random()*Object.keys(questionObj.questions).length)
+      
       dbQuestions.forEach(function(question) {
         questionObj.questions.push(question.dataValues)
+        
       })
-      // console.log("random question: " + JSON.stringify(questionObj.questions[randomIndex]));
+
       questionObj.questions.splice(randomIndex)
-      // console.log(questionObj.questions);
+      console.log(parsedQuestions);
+      
       // console.log("Question obj: " + JSON.stringify(questionObj));
-      res.render("Question", questionObj);
+      res.render("Question", {
+        questions: JSON.stringify(questionObj.questions)
+      });
     });
     
     

@@ -24,7 +24,7 @@ module.exports = function(app) {
     console.log("this is hit");
     db.Game.findOne({
       where: {
-        userCount: { [op.lt] : 6 }
+        userCount: { [op.lt] : 4 }
       },
       order: [[
         "createdAt", "ASC"
@@ -33,9 +33,8 @@ module.exports = function(app) {
       if (game === null) {
         //query trivia 
         db.Trivia.findAll().then(function(trivia) {
-          // console.log(trivia);
           let triviaIds = [];
-          // let counter = 0;
+          let counter = 0;
           trivia.forEach(function(question) {
             triviaIds.push(question.dataValues.id);
           })
@@ -47,7 +46,6 @@ module.exports = function(app) {
           }
           triviaIds = triviaIds.toString()
 
-          
           db.Game.create({
             triviaIds: triviaIds
           }).then(function(game) {
@@ -55,7 +53,14 @@ module.exports = function(app) {
               username: req.body.username,
               gameId: game.dataValues.id
             }).then(function(user) {
-              console.log(user);
+              var prevUserId = game.dataValues.userIds;
+              db.Game.update({
+                
+                userIds: userIds,
+                where: {
+                  id: game.dataValues.id
+                }
+              })
               
             })
           })
@@ -93,3 +98,6 @@ module.exports = function(app) {
     
   })
 };
+function updateGame(user) {
+
+}
