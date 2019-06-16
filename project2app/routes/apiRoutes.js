@@ -20,11 +20,37 @@ module.exports = function(app) {
     });
   });
 
+function test1(trivia, cd ){
+  let triviaIds = []; 
+
+  trivia.forEach(function(question) {
+    triviaIds.push(question.dataValues.id);
+  })
+
+  cd(triviaIds)
+}
+
+function test(triviaIds, cb){
+  let triviaGameIds = [];
+
+  while (triviaGameIds.length < 4) {
+
+    let index = Math.floor(Math.random() * (triviaIds.length - 1))
+    let id = triviaIds[index];
+
+    if(!triviaGameIds.includes(id)){
+      triviaGameIds.push(id);
+    } 
+  }
+  
+  triviaGameIds = triviaGameIds.toString()
+  cb(triviaGameIds)
+}
+
   app.post("/api/user", function(req, res) {
-    console.log("this is hit");
     db.Game.findOne({
       where: {
-        userCount: { [op.lt] : 6 }
+        userCount: { [op.lt] : 4 }
       },
       order: [[
         "createdAt", "ASC"
@@ -33,63 +59,70 @@ module.exports = function(app) {
       if (game === null) {
         //query trivia 
         db.Trivia.findAll().then(function(trivia) {
-          // console.log(trivia);
-          let triviaIds = [];
-          // let counter = 0;
-          trivia.forEach(function(question) {
-            triviaIds.push(question.dataValues.id);
-          })
-          let triviaGameIds = [];
-          while (counter < 4) {
-            let index = Math.floor(Math.random() * (4 - 1))
-            let id = triviaIds[index];
-            triviaGameIds.push(id);
-          }
-          triviaIds = triviaIds.toString()
-
-          
-          db.Game.create({
-            triviaIds: triviaIds
-          }).then(function(game) {
-            db.User.create({
-              username: req.body.username,
-              gameId: game.dataValues.id
-            }).then(function(user) {
-              console.log(user);
-              
-            })
-          })
-        })
-        //pick 4 random indexes 
-        //push ids of indexes into an array
-        //convert array to string
-        //create game
+        test1(trivia, function(triviaIds){
         
-        //create user
-        //update game with users
+          test(triviaIds, function(triviaGameIds){
+            db.Game.create({
+              triviaIds: triviaGameIds
+            }).then(function(game) {
+              createNewUser(req, game, res)
 
-        // db.Game.create(req.body)
-      } else {
-        let userIds = game.dataValues.userIds;
-        db.User.create({
-          username: req.body.username,
-          gameId: game.dataValues.id
-        }).then(function(newUser) {
-          // console.log(newUser);
-          userIds = userIds + newUser.dataValues.id;
-          db.Game.update({ //we want to append the user id to the existing string of user ids (look into appending onto the end of a value in sequelize)
-            userIds: userIds,
-            where: {
-              id: game.dataValues.id
-            }
-          }).then(function(updatedGame) {
-
-            
+            })
+          
           })
         })
+        })
+      
+      } 
+      else {
+        createNewUser(req, game, res)
       }
       
     })
     
   })
 };
+
+function createNewUser(req, game, res){
+  console.log(req);
+  
+  db.User.create({
+    username: req.body.username,
+    GameId: game.dataValues.id
+  }).then(function(user) {
+    updateGameUser(user.dataValues, game.dataValues, res);
+  })
+}
+
+function updateGameUser(user, game, res){
+  var newUserIds;
+  if(game.userIds) {
+    var prevUserId = game.userIds;
+    newUserIds = prevUserId +","+ user.id;
+  } else {
+    newUserIds =  user.id.toString();
+  }
+  var newCount = parseInt(game.userCount) + 1;
+
+  db.Game.update(
+    {
+      userIds: newUserIds,
+      userCount: newCount
+    },
+    {
+    where: {
+      id: game.id
+    }
+  })
+  .then(function(updatedGame){
+    console.log(updatedGame)
+    // if newCount is 4 or more than start game;
+    if(newCount > 3) {
+      
+      res.json({gameid: game.id, userid:user.id, status: true});
+    } else {
+      res.json({gameid: game.id, userid:user.id, status: false}); 
+    }
+    // else show loading message to user waiting for more users to join
+  })
+}

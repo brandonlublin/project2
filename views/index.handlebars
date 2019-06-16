@@ -1,3 +1,7 @@
+<div id="loading" class="overlay hide">
+  <img src="https://media0.giphy.com/media/4NpH0k494YKL4oxIeQ/source.gif" alt="loading...">
+  <h1 class="load-msg"></h1>
+</div>
 <div class="container">
   <div class="jumbotron text-center" id="home-jumbotron">
     <h1 class="display-6" id="appTitle">KEBÄB</h1>
@@ -19,17 +23,34 @@
 
 <script>
   $("#submit").on("click", function (event) {
-    { { !--event.preventDefault(); --} }
     console.log('click')
+    event.preventDefault(); 
     let userName = $("#username").val().trim();
     if (userName !== '' && userName.length > 0) {
       var user = {
         username: userName
       }
-
+      $("#loading .load-msg").text(`Loading ${userName} to game. Hold tight.`);
+      $("#loading").removeClass("hide");
+      
       $.post("/api/user", user, function (response) {
-        console.log(response);
-      })
+       
+        window.localStorage.setItem("gameid", response.gameid);
+        window.localStorage.setItem("userid", response.userid);
+
+       if(response.status) {
+
+          $("#loading .load-msg").text("");
+          $("#loading").addClass("hide");
+          // start game redirect user to question page
+          window.location.href = `/play/${response.gameid}`; 
+       } else {
+
+          $("#loading .load-msg").text("You are now in queue, waiting for more users to join.");
+         // show message waiting for users
+         // interval check status of userCount for game by id
+       }
+      }) 
     }
   })
 </script>

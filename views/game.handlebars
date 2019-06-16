@@ -1,0 +1,12 @@
+{{#each trivia}}
+    <div class="question hide" id={{id}}>
+        <h1>{{triviaText}}</h1>
+    </div>
+{{/each}}
+
+<script>
+    var triviaData = {{{trivia}}}
+    triviaData.forEach(function(data){
+         console.log(data.triviaText)
+    })
+</script>
