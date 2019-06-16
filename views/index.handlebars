@@ -21,7 +21,11 @@
   </div>
 </div>
 
+<script src="/socket.io/socket.io.js"></script>
 <script>
+  var socket = io();
+  io.connect('http://localhost');
+  
   $("#submit").on("click", function (event) {
     console.log('click')
     event.preventDefault(); 
