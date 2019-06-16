@@ -1,5 +1,4 @@
 // Get references to page elements
-alert("index");
 // The API object contains methods for each kind of request we'll make
 var API = {
   // Getting Trivia
@@ -32,9 +31,10 @@ var API = {
 
 var populatQues = function(id) {
   API.getTrivia(id).then(function(data) {
+    console.log(data.triviaText);
 
-  });
-
+});
+populatQues(1);
 // // refreshExamples gets new examples from the db and repopulates the list
 // var refreshExamples = function() {
 //   API.getExamples().then(function(data) {
