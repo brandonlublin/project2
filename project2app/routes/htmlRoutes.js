@@ -6,10 +6,16 @@ module.exports = function(app) {
     res.render("index");
   });
 
-  app.get("/username", function(req, res) {
-      res.render("username", {
-        username: req.body.username
-      });
+  app.get("/roundResults", function(req, res) {
+      res.render("RoundResults")
+  });
+
+  app.get("/gameResults", function(req, res) {
+    res.render("GameResults")
+  });
+
+  app.get("/answerChoice", function(req, res) {
+    res.render("AnswerChoice")
   });
   
   app.get("/question", function(req, res) {

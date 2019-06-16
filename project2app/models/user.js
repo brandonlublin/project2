@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       },
     },
-    userScore:{
+    userScore: {
       type: DataTypes.INTEGER,
       defaultValue: 0
     }
