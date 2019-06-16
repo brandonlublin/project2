@@ -76,3 +76,6 @@ body {
 .answerButton:hover {
   background-color: #fd9c8b
 }
+#gameResultsGroup {
+  margin-top: 1rem
+}
