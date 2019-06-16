@@ -21,10 +21,8 @@ body {
   margin-top: 1rem
 }
 #home-jumbotron {
-  position: absolute;
+  margin: 15% auto 10%;
   width: 75%;
-  left: 50%;
-  transform: translate(-50%,28%)
 }
 #username:focus {
   border-bottom: 1px solid tomato;
@@ -67,4 +65,19 @@ body {
 }
 .answerButton:hover {
   background-color: #fd9c8b
+}
+
+.overlay {
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: rgba(153, 200, 214, .9);
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  text-align: center;
+  padding: 10%;
+}
+
+.hide {
+  display: none;
 }

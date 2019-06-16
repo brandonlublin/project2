@@ -18,7 +18,7 @@ module.exports = function(app) {
         questions: []
       }
       var randomIndex = Math.floor(Math.random()*Object.keys(questionObj.questions).length)
-      
+      let parsedQuestions = JSON.stringify(questionObj.questions)
       dbQuestions.forEach(function(question) {
         questionObj.questions.push(question.dataValues)
         
@@ -35,6 +35,61 @@ module.exports = function(app) {
     
     
   });
+
+
+  app.get("/play/:gameid", function(req, res){
+    /*
+      find game by id
+      get triviaIds split and for each find trivia by id create an obj with user id, round, and all the trivia data
+    */
+    db.Game.findByPk(req.params.gameid)
+      .then(function(game){
+        var gameData = {
+          trivia: [],
+          userIds: game.dataValues.userIds.split(","),
+          triviaIds: game.dataValues.triviaIds.split(","),
+          round: game.dataValues.round,
+          id: game.dataValues.id,
+          userCount: game.dataValues.userCount
+        }
+      //  console.log(gameData.triviaIds)
+      //  console.log(gameData.triviaIds.length)
+      for(var i = 0; i < 4; i++){
+        var id = parseInt( gameData.triviaIds[i]);
+    
+        getTrivia(id)
+          .then(function(triviaData){
+            // console.log("triviaData", triviaData)
+            gameData.trivia.push(triviaData)
+            console.log(gameData.trivia)
+            if(gameData.trivia.length === 4){
+              res.render('game', gameData);
+            }
+          })
+      }
+    })
+  })
+
+function cycleTriviaIds(gameData, cb){
+  for(var i = 0; i < gameData.triviaIds.length; i++){
+    var id = parseInt( gameData.triviaIds[i]);
+    getTrivia(id)
+      .then(function(triviaData){
+        gameData.trivia.push(triviaData)
+      })
+  }
+  cb()
+}
+
+function getTrivia(id){
+  var id = parseInt(id)
+ 
+  return db.Trivia.findByPk(id)
+  .then(function(trivia){
+    return trivia.dataValues
+  })
+}
+
 
   app.get("/answerChoice", function(req, res) {
     db.UserAnswer.findAll({}).then(function(dbAnswer) {
