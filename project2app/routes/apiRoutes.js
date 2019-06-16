@@ -2,49 +2,51 @@ var db = require("../models");
 const Sequelize = require("sequelize");
 const op = Sequelize.Op;
 
-module.exports = function(app) {
+module.exports = function (app) {
 
-  // Get All Questions
-  app.get("/api/Trivia", function(req, res) {
-    db.Trivia.findAll().then(function(getQuestionDb) {
-      res.json(getQuestionDb);
-    });
-  });
+
   // Get One Question
-  app.get("/api/Trivia/:id", function(req, res) {
+  app.get("/api/Trivia/:id", function (req, res) {
     db.Trivia.findOne({
       where: {
         id: req.params.id
       }
-    }).then(function(getQuestionDb) {
+    }).then(function (getQuestionDb) {
       res.json(getQuestionDb);
     });
   });
 
-  // Create a new example
-  app.post("/api/answers", function(req, res) {
-    db.Questions.create(req.body).then(function(userAnsDb) {
+  // // Get All User Answer
+  app.get("/api/answers", function (req, res) {
+    db.UserAnswer.findAll().then(function (getAnsDb) {
+      res.json(getAnsDb);
+    });
+  });
+  // Update user Answer table by ID
+  app.post("/api/answers", function (req, res) {
+    db.UserAnswer.create(req.body)
+      .then(function (userAnsDb) {
       res.json(userAnsDb);
     });
   });
 
-  app.post("/api/user", function(req, res) {
+  app.post("/api/user", function (req, res) {
     console.log("this is hit");
     db.Game.findOne({
       where: {
-        userCount: { [op.lt] : 6 }
+        userCount: { [op.lt]: 6 }
       },
       order: [
         "createdAt", "ASC"
       ]
-    }).then(function(game) {
+    }).then(function (game) {
       if (game === null) {
         //query trivia 
-        db.Trivia.findAll().then(function(trivia) {
+        db.Trivia.findAll().then(function (trivia) {
           // console.log(trivia);
           let triviaIds = [];
           // let counter = 0;
-          trivia.forEach(function(question) {
+          trivia.forEach(function (question) {
             triviaIds.push(question.dataValues.id);
           })
           let triviaGameIds = [];
@@ -55,16 +57,16 @@ module.exports = function(app) {
           }
           triviaIds = triviaIds.toString()
 
-          
+
           db.Game.create({
             triviaIds: triviaIds
-          }).then(function(game) {
+          }).then(function (game) {
             db.User.create({
               username: req.body.username,
               gameId: game.dataValues.id
-            }).then(function(user) {
+            }).then(function (user) {
               console.log(user);
-              
+
             })
           })
         })
@@ -72,7 +74,7 @@ module.exports = function(app) {
         //push ids of indexes into an array
         //convert array to string
         //create game
-        
+
         //create user
         //update game with users
 
@@ -82,7 +84,7 @@ module.exports = function(app) {
         db.User.create({
           username: req.body.username,
           gameId: game.dataValues.id
-        }).then(function(newUser) {
+        }).then(function (newUser) {
           // console.log(newUser);
           userIds = userIds + newUser.dataValues.id;
           db.Game.update({ //we want to append the user id to the existing string of user ids (look into appending onto the end of a value in sequelize)
@@ -90,14 +92,14 @@ module.exports = function(app) {
             where: {
               id: game.dataValues.id
             }
-          }).then(function(updatedGame) {
+          }).then(function (updatedGame) {
 
-            
+
           })
         })
       }
-      
+
     })
-    
+
   })
 };
