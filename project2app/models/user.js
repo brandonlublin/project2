@@ -8,22 +8,21 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       },
     },
-    userScore: DataTypes.INTEGER
+    userScore:{
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    }
   });
 
   User.associate = function(models) {
     User.hasMany(models.UserAnswer, {
-      foreignKey: {
-        allowNull: false
-      },
+      foreignKey: "UserAnserId",
       onDelete: "cascade"
     });
   };
   User.associate = function(models) {
     User.belongsTo(models.Game, {
-      foreignKey: {
-        allowNull: false
-      },
+      foreignKey:  "GameId",
       onDelete: "cascade"
     });
   };

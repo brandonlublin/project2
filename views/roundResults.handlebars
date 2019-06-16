@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="jumbotron text-center" id="question-jumbotron">
+        <h1 class="display-6" id="gameTitle">KEBÄB</h1>
+        <p id="tagline">Behold, your results for this round!</p>
+        <hr class="my-4">
+        <div class="container" id="bodyCont">
+            <div class="row">
+                <div class="col-md-5 align-self-center">
+                    <h1 id="userQuestRoundRes">{{questions}}</h1>
+                </div>
+                <div class="col-md-7">
+                    <div class="row mb-0">
+                        <div class="col-4">
+                            <div class="list-group" id="list-tab" role="tablist">
+                                <a class="list-group-item list-group-item-action active" id="list-one-list"
+                                    data-toggle="list" href="#list-one" role="tab" aria-controls="one">{{username}}</a>
+                                <a class="list-group-item list-group-item-action" id="list-two-list" data-toggle="list"
+                                    href="#list-two" role="tab" aria-controls="two">{{username}}</a>
+                                <a class="list-group-item list-group-item-action" id="list-three-list"
+                                    data-toggle="list" href="#list-three" role="tab"
+                                    aria-controls="three">{{username}}</a>
+                                <a class="list-group-item list-group-item-action" id="list-four-list" data-toggle="list"
+                                    href="#list-four" role="tab" aria-controls="four">{{username}}</a>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="list-one" role="tabpanel"
+                                    aria-labelledby="list-one-list"></div>
+                                <div class="tab-pane fade" id="list-two" role="tabpanel"
+                                    aria-labelledby="list-two-list">...</div>
+                                <div class="tab-pane fade" id="list-three" role="tabpanel"
+                                    aria-labelledby="list-three-list">...</div>
+                                <div class="tab-pane fade" id="list-four" role="tabpanel"
+                                    aria-labelledby="list-four-list">...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="submit" class="waves-effect waves-light btn">Next Question</button>
+        </div>
+    </div>
+</div>

@@ -30,11 +30,45 @@ module.exports = function (app) {
     });
   });
 
+<<<<<<< HEAD
   app.post("/api/user", function (req, res) {
     console.log("this is hit");
     db.Game.findOne({
       where: {
         userCount: { [op.lt]: 6 }
+=======
+function test1(trivia, cd ){
+  let triviaIds = []; 
+
+  trivia.forEach(function(question) {
+    triviaIds.push(question.dataValues.id);
+  })
+
+  cd(triviaIds)
+}
+
+function test(triviaIds, cb){
+  let triviaGameIds = [];
+
+  while (triviaGameIds.length < 4) {
+
+    let index = Math.floor(Math.random() * (triviaIds.length - 1))
+    let id = triviaIds[index];
+
+    if(!triviaGameIds.includes(id)){
+      triviaGameIds.push(id);
+    } 
+  }
+  
+  triviaGameIds = triviaGameIds.toString()
+  cb(triviaGameIds)
+}
+
+  app.post("/api/user", function(req, res) {
+    db.Game.findOne({
+      where: {
+        userCount: { [op.lt] : 4 }
+>>>>>>> 353cbe4b44c04b28c04700db55b79bd9de7c9553
       },
       order: [
         "createdAt", "ASC"
@@ -42,6 +76,7 @@ module.exports = function (app) {
     }).then(function (game) {
       if (game === null) {
         //query trivia 
+<<<<<<< HEAD
         db.Trivia.findAll().then(function (trivia) {
           // console.log(trivia);
           let triviaIds = [];
@@ -67,9 +102,22 @@ module.exports = function (app) {
             }).then(function (user) {
               console.log(user);
 
+=======
+        db.Trivia.findAll().then(function(trivia) {
+        test1(trivia, function(triviaIds){
+        
+          test(triviaIds, function(triviaGameIds){
+            db.Game.create({
+              triviaIds: triviaGameIds
+            }).then(function(game) {
+              createNewUser(req, game, res)
+
+>>>>>>> 353cbe4b44c04b28c04700db55b79bd9de7c9553
             })
+          
           })
         })
+<<<<<<< HEAD
         //pick 4 random indexes 
         //push ids of indexes into an array
         //convert array to string
@@ -96,10 +144,60 @@ module.exports = function (app) {
 
 
           })
+=======
+>>>>>>> 353cbe4b44c04b28c04700db55b79bd9de7c9553
         })
+      
+      } 
+      else {
+        createNewUser(req, game, res)
       }
 
     })
 
   })
 };
+
+function createNewUser(req, game, res){
+  console.log(req);
+  
+  db.User.create({
+    username: req.body.username,
+    GameId: game.dataValues.id
+  }).then(function(user) {
+    updateGameUser(user.dataValues, game.dataValues, res);
+  })
+}
+
+function updateGameUser(user, game, res){
+  var newUserIds;
+  if(game.userIds) {
+    var prevUserId = game.userIds;
+    newUserIds = prevUserId +","+ user.id;
+  } else {
+    newUserIds =  user.id.toString();
+  }
+  var newCount = parseInt(game.userCount) + 1;
+
+  db.Game.update(
+    {
+      userIds: newUserIds,
+      userCount: newCount
+    },
+    {
+    where: {
+      id: game.id
+    }
+  })
+  .then(function(updatedGame){
+    console.log(updatedGame)
+    // if newCount is 4 or more than start game;
+    if(newCount > 3) {
+      
+      res.json({gameid: game.id, userid:user.id, status: true});
+    } else {
+      res.json({gameid: game.id, userid:user.id, status: false}); 
+    }
+    // else show loading message to user waiting for more users to join
+  })
+}
