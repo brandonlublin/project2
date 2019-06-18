@@ -6,7 +6,11 @@ module.exports = function(sequelize, DataTypes) {
     updatedAt: {  
       type: Sequelize.DATE, 
       defaultValue: Sequelize.NOW 
-    }
+    },
+    createdAt: {
+      type: Sequelize.DATE, 
+      defaultValue: Sequelize.NOW 
+    },
   });
 
   AnswerVotes.associate = function(models) {
