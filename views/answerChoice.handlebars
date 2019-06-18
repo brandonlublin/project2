@@ -5,18 +5,11 @@
         <h1 class="display-6" id="gameTitle">KEBÄB</h1>
         <p id="tagline">Pick the correct answer from the options below... choose carefully!</p>
         <hr class="my-4">
-        <h1 id="userQuestion">{{questions}}</h1><br>
         <div class="container" id="answerGroup">
-            <a class="waves-effect waves-light btn-large answerButton" id="buttonOne"
-                href="/roundResults">{{userAnswer}}</a>
-            <a class="waves-effect waves-light btn-large answerButton" id="buttonTwo"
-                href="/roundResults">{{userAnswer}}</a>
-            <a class="waves-effect waves-light btn-large answerButton" id="buttonThree"
-                href="/roundResults">{{userAnswer}}</a>
-            <a class="waves-effect waves-light btn-large answerButton" id="buttonFour"
-                href="/roundResults">{{userAnswer}}</a>
-            <a class="waves-effect waves-light btn-large answerButton" id="buttonFive"
-                href="/roundResults">{{userAnswer}}</a>
+            {{#each userAnswer}}
+            <a class="waves-effect waves-light btn-large answerButton" data-questionid={{userAnswer.TriviumId}}
+                data-userid={{userAnswer.userId}} data-gameid={{userAnswer.GameId}}>{{userAnswer.userAnswers}}</a>
+            {{/each}}
         </div>
     </div>
 </div>
@@ -31,6 +24,7 @@
                     type: "GET"
                 })
             },
+            // Get user
             getUser: function (id) {
                 return $.ajax({
                     url: "api/user",
@@ -38,23 +32,8 @@
                 })
             }
         }
-        $("#buttonOne").click(function (event) {
-            event.preventDefault();
-            console.log($("#buttonOne").text());
-            var userScore = 0;
-            for (var i = 1; i < 5; i++) {
-                API.getTrivia(i).then(function (triviaData) {
-                    console.log("data", triviaData.triviaAnswer);
+    
 
-                    if ($("#buttonOne").text().toLowerCase() === triviaData.triviaAnswer.toLowerCase()) {
-                        console.log("trivia");
-                        userScore += 10;
-                    }
-                    console.log("score", userScore);
-                })
-
-            }
-            
             $(this).trigger("click")
 
         })
