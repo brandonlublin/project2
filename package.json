@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "lint": "eslint --quiet .",
-    "fix": "eslint --fix .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "fix": "eslint --fix ."
   },
   "license": "ISC",
   "dependencies": {
