@@ -1,17 +1,16 @@
 {{!-- This is the handlebars file where users view the prompt that they're "answering". --}}
-
+{{> loader}}
 <div class="container">
     <div class="jumbotron text-center" id="question-jumbotron">
         <h1 class="display-6" id="gameTitle">KEBÄB</h1>
+        <p id="username"></p>
+        <p>prompt: {{round}}/4 </p>
         <p id="tagline">Fill in the blank below with your best fake answer!</p>
+        <p>Time Remaining: <span id="time"></span></p>
         <hr class="my-4">
-        {{#each trivia}}
-            <div class="question" id={{id}}>
-                {{#if @key}}
-                    <h1>{{triviaText}}</h1>
-                {{/if}}
+            <div class="question">
+                <h3 class="qText" id={{questionObj.id}}>{{questionObj.triviaText}}</h3>
             </div>
-        {{/each}}
         <div class="container" id="smallInput">
             <form id="userAnswerForm">
                 <input id="userAnswer" type="text" placeholder="Enter your answer here" required />
@@ -22,5 +21,79 @@
 </div>
 
 <script>
+    var time = 20;
+    $("#time").text(time);
+    var timer = setInterval(countDown, 1000);
+
+    var username = window.localStorage.getItem("username") || "";
+    $("#username").text(username);
+
+    var submission = {
+        gameId: {{id}},
+        questionId: {{questionObj.id}},
+        round: {{round}},
+        username: username,
+        userCount: {{userCount}},
+        userId: parseInt(window.localStorage.getItem("userid")),
+        userAnswer: "" 
+    }
+
+    function countDown(){
+        time--
+        $("#time").text(time);
+        if(time === 0){
+            clearInterval(timer);
+            $("#time").text("Time is up!");
+            // get users input 
+            getUserInput();
+        }
+    }
+
+    function getUserInput(){
+        submission.userAnswer = $("#userAnswer").val().trim();
+        $("#userAnswer").val("");
+
+        if(submission.userAnswer.length === 0 || submission.userAnswer === "") {
+            submission.userAnswer = "popeye the sailor man."
+            // show a modal or text on the page to let the user know they didnt answer so we answer for them
+        }
+
+        // show loader and send submission
+        showLoader()
+    }
+
+    function showLoader(){
+        $("#loading .load-msg").text(`Waiting for all players to answer the question...`);
+        $("#loading").removeClass("hide");
+        submitAnswer();
+    }
+
+    function submitAnswer(){
+        $.post("/api/userAnswer", submission, function (response) {
+            if(response) {
+                // if all user have answers redirect user to the answer selection page (answerChoice)
+                window.location.href = `/play/${submission.gameId}/${submission.questionId}`; 
+                console.log(response)
+            } else {
+                // else check if all user have answers every 1 second
+                // same as home page waiting for users to join
+                // craete interval that checks userAnswers table ever 1 sec.
+                //"/api/useranswers/{submission.gameId}/{submission.questionId}" - doest exist
+            }
+        });
+    }
+  
+    $("#submit").on("click", function (event) {
+        event.preventDefault();
+        getUserInput()
+    });
+
+    $("#submit").keypress(function (e) {
+        if (e.which == 13) {
+            event.preventDefault();
+            getUserInput()
+            return false; 
+        }
+    });
 
 </script>
