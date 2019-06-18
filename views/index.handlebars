@@ -19,9 +19,12 @@
 </div>
 
 <script>
+  var socket = io
+  io.connect('http://localhost');
+
   $("#submit").on("click", function (event) {
     console.log('click')
-    event.preventDefault(); 
+    event.preventDefault();
     let userName = $("#username").val().trim();
     if (userName !== '' && userName.length > 0) {
       var user = {
@@ -29,9 +32,8 @@
       }
       $("#loading .load-msg").text(`Loading ${userName} to game. Hold tight.`);
       $("#loading").removeClass("hide");
-      
+
       $.post("/api/user", user, function (response) {
-      
         window.localStorage.setItem("gameid", response.gameid);
         window.localStorage.setItem("username", response.username);
         window.localStorage.setItem("userid", response.userid);
@@ -39,6 +41,7 @@
         if(response.status) {
 
           moveToGame(response)
+
       } else {
         var checker = setInterval(checkStatus, 1000);
 

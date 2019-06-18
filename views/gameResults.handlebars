@@ -1,19 +1,18 @@
 <div class="container">
-  <div class="row">
-    <div class="col-8 offset-2">
-      <div class="card mt-4">
-        <div class="card-body">
-          <h5 class="card-title">Example</h5>
-          <p>
-            <strong>ID</strong>: {{example.id}}</p>
-          <p>
-          <p>
-            <strong>Text</strong>: {{example.text}}</p>
-          <p>
-            <strong>Description:</strong> {{example.description}}</p>
-            <a href="/">← Back To Home</a>
-        </div>
-      </div>
+  <div class="jumbotron text-center" id="question-jumbotron">
+    <h1 class="display-6" id="gameTitle">KEBÄB</h1>
+    <p id="tagline">Behold, your results for this game!</p>
+    <hr class="my-4">
+    <!-- This is the user who won. "USER WON!"-->
+    <div class="container" id="bodyCont">
+      <h1 id="winningUser">{{username}}</h1>
     </div>
+    <ul class="list-group list-group-flush" id="gameResultsGroup">
+      <li class="list-group-item" id="one">...</li>
+      <li class="list-group-item" id="two">...</li>
+      <li class="list-group-item" id="three">...</li>
+      <li class="list-group-item" id="four">...</li>
+    </ul>
+    <button id="submit" class="waves-effect waves-light btn">Play Again</button>
   </div>
 </div>

@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
       isUnique: true,
       validate: {
         len: [1]
-      },
+      }
     },
     userScore: {
       type: DataTypes.INTEGER,
@@ -16,13 +16,13 @@ module.exports = function(sequelize, DataTypes) {
 
   User.associate = function(models) {
     User.hasMany(models.UserAnswer, {
-      foreignKey: "UserAnserId",
+      foreignKey: "UserAnswerId",
       onDelete: "cascade"
     });
   };
   User.associate = function(models) {
     User.belongsTo(models.Game, {
-      foreignKey:  "GameId",
+      foreignKey: "GameId",
       onDelete: "cascade"
     });
   };
