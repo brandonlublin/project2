@@ -1,6 +1,6 @@
-var Sequelize = require('sequelize');
+var Sequelize = require("sequelize");
 module.exports = function(sequelize, DataTypes) {
-  var Game = sequelize.define('Game', {
+  var Game = sequelize.define("Game", {
     userIds: DataTypes.STRING,
     triviaIds: DataTypes.STRING,
     userCount: {
@@ -12,12 +12,12 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: 0
     },
     createdAt: {
-      type: Sequelize.DATE, 
-      defaultValue: Sequelize.NOW 
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
     },
-    updatedAt: {  
-      type: Sequelize.DATE, 
-      defaultValue: Sequelize.NOW 
+    updatedAt: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
     }
   });
 
@@ -27,7 +27,6 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: "cascade"
     });
   };
-  
   // Game.associate = function(models) {
   //   Game.hasMany(models.Trivia, {
   //     foreignKey: "TriviaId",

@@ -1,4 +1,4 @@
-var Sequelize = require('sequelize');
+var Sequelize = require("sequelize");
 module.exports = function(sequelize, DataTypes) {
   var UserAnswer = sequelize.define("UserAnswer", {
     userAnswer: {
@@ -10,12 +10,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     username: DataTypes.STRING,
     createdAt: {
-      type: Sequelize.DATE, 
-      defaultValue: Sequelize.NOW 
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
     },
-    updatedAt: {  
-      type: Sequelize.DATE, 
-      defaultValue: Sequelize.NOW 
+    updatedAt: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
     }
   });
 

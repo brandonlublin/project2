@@ -1,4 +1,4 @@
-var Sequelize = require('sequelize');
+var Sequelize = require("sequelize");
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
     username: {
@@ -14,12 +14,12 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: 0
     },
     createdAt: {
-      type: Sequelize.DATE, 
-      defaultValue: Sequelize.NOW 
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
     },
-    updatedAt: {  
-      type: Sequelize.DATE, 
-      defaultValue: Sequelize.NOW 
+    updatedAt: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
     }
   });
 

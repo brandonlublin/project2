@@ -20,13 +20,13 @@
 
 <script>
   var socket = io
-  io.connect('http://localhost');
+  io.connect("http://localhost");
 
   $("#submit").on("click", function (event) {
-    console.log('click')
+    console.log("click")
     event.preventDefault();
     let userName = $("#username").val().trim();
-    if (userName !== '' && userName.length > 0) {
+    if (userName !== "" && userName.length > 0) {
       var user = {
         username: userName
       }
