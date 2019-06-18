@@ -7,8 +7,13 @@
         <hr class="my-4">
         <div class="container" id="answerGroup">
         {{#each userAnswer}}
-            <a class="waves-effect waves-light btn-large answerButton" data-questionid={{userAnswer.TriviumId}}  data-userid={{userAnswer.userId}} data-gameid={{userAnswer.GameId}}>{{userAnswer.userAnswers}}</a>
+            <a class="waves-effect waves-light btn-large answerButton" data-questionid={{TriviumId}}  data-userid={{UserId}} data-gameid={{GameId}}>{{userAnswer}}</a>
         {{/each}}
         </div> 
     </div>
 </div>
+
+<script>
+    var socket = io
+    io.connect("http://localhost");
+</script>

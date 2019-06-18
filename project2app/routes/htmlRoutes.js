@@ -78,16 +78,6 @@ module.exports = function(app) {
     });
   });
 
-  // function cycleTriviaIds(gameData, cb) {
-  //   for (var i = 0; i < gameData.triviaIds.length; i++) {
-  //     var id = parseInt(gameData.triviaIds[i]);
-  //     getTrivia(id).then(function(triviaData) {
-  //       gameData.trivia.push(triviaData);
-  //     });
-  //   }
-  //   cb();
-  // }
-
   function getTrivia(id) {
     var id = parseInt(id);
 

@@ -24,7 +24,7 @@ module.exports = function(app) {
       GameId: parseInt(req.body.gameId),
       username: req.body.username,
     }).then(function(response) {
-      // console.log(response.dataValues);
+      console.log(response.dataValues);
       db.UserAnswer.findAll({
         where: {
           GameId: parseInt(req.body.gameId),
