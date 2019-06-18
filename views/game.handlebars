@@ -21,6 +21,9 @@
 </div>
 
 <script>
+    var socket = io
+    io.connect("http://localhost");
+
     var time = 20;
     $("#time").text(time);
     var timer = setInterval(countDown, 1000);
@@ -71,18 +74,29 @@
     function submitAnswer(){
         $.post("/api/userAnswer", submission, function (response) {
             if(response) {
+                console.log(response)
                 // if all user have answers redirect user to the answer selection page (answerChoice)
                 window.location.href = `/play/${submission.gameId}/${submission.questionId}`; 
-                console.log(response)
+                window.localStorage.setItem("useranswer", response.userAnswer);
+
             } else {
-                // else check if all user have answers every 1 second
-                // same as home page waiting for users to join
-                // craete interval that checks userAnswers table ever 1 sec.
-                //"/api/useranswers/{submission.gameId}/{submission.questionId}" - doest exist
+                var checker = setInterval(checkStatus, 1000);
+
+                $("#loading .load-msg").text("");
+                // show message waiting for users
+                // interval check status of userCount for game by id
+                function checkStatus(){
+                    $.get(`/api/useranswers/${submission.gameId}/${submission.questionId}`, function(gameStatus){
+                        if(gameStatus){
+                        // clear interval
+                        clearInterval(checker)
+                        }
+                    })
+                }
             }
         });
     }
-  
+
     $("#submit").on("click", function (event) {
         event.preventDefault();
         getUserInput()
