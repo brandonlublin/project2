@@ -29,9 +29,9 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Socket setup & pass server
-io.on("connection", function(socket){
+io.on("connection", function(socket) {
   console.log("made connection to socket: ", socket.id);
-  socket.on("disconnect", function(){
+  socket.on("disconnect", function() {
     console.log("connection lost from socket: ", socket.id);
   });
 });
@@ -48,9 +48,9 @@ if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
 }
 
-// Starting the server, syncing our models ------------------------------------/
-db.sequelize.sync(syncOptions).then(function () {
-  server = app.listen(PORT, function () {
+// Starting the server, syncing our models --------------s----------------------/
+db.sequelize.sync(syncOptions).then(function() {
+  server = app.listen(PORT, function() {
     console.log(
       "==> 🌎 Listening on port %s. Visit http://localhost:%s/ in your browser.",
       PORT,

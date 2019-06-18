@@ -8,4 +8,4 @@ cache:
     - node_modules
 services: mysql
 before_install:
-  - mysql -e 'CREATE DATABASE testdb;'
+  - mysql -e "CREATE DATABASE testdb;"

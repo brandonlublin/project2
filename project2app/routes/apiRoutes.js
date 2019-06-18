@@ -1,10 +1,10 @@
-var db = require('../models');
-const Sequelize = require('sequelize');
-const op = Sequelize.Op;
+var db = require("../models");
+var Sequelize = require("sequelize");
+var Op = Sequelize.Op;
 
 module.exports = function(app) {
   // Get all examples
-  app.get('/api/trivia/:id', function(req, res) {
+  app.get("/api/trivia/:id", function(req, res) {
     db.Questions.findOne({
       where: {
         id: req.params.id,
@@ -15,7 +15,7 @@ module.exports = function(app) {
   });
   // Create a new example
 
-  app.post('/api/useranswer/', function(req, res) {
+  app.post("/api/useranswer/", function(req, res) {
     console.log(req.body);
     db.UserAnswer.create({
       userAnswer: req.body.userAnswer,
@@ -28,8 +28,8 @@ module.exports = function(app) {
       db.UserAnswer.findAll({
         where: {
           GameId: parseInt(req.body.gameId),
-          TriviumId: parseInt(req.body.questionId),
-        },
+          TriviumId: parseInt(req.body.questionId)
+        }
       }).then(function(triviaRes) {
         if (triviaRes.length < 4) {
           res.json(false);
@@ -40,7 +40,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/api/useranswer/:gameid/:questionid', function(req, res) {
+  app.get("/api/useranswer/:gameid/:questionid", function(req, res) {
     db.UserAnswer.findAll({
       where: {
         GameId: parseInt(req.params.gameid),
@@ -55,12 +55,12 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/api/user', function(req, res) {
+  app.post("/api/user", function(req, res) {
     db.Game.findOne({
       where: {
-        userCount: { [op.lt]: 4 },
+        userCount: { [Op.lt]: 4 },
       },
-      order: [['createdAt', 'ASC']],
+      order: [["createdAt", "ASC"]],
     }).then(function(game) {
       if (game === null) {
         //query trivia
@@ -88,7 +88,7 @@ module.exports = function(app) {
   });
 
   // check user count to move users into game
-  app.get('/api/game/:id/status', function(req, res) {
+  app.get("/api/game/:id/status", function(req, res) {
     db.Game.findByPk(req.params.id).then(function(game) {
       var gameUserCount = game.dataValues.userCount;
       if (gameUserCount > 3) {
@@ -141,7 +141,7 @@ function updateGameUser(user, game, res) {
   var newUserIds;
   if (game.userIds) {
     var prevUserId = game.userIds;
-    newUserIds = prevUserId + ',' + user.id;
+    newUserIds = prevUserId + "," + user.id;
   } else {
     newUserIds = user.id.toString();
   }
