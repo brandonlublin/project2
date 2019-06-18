@@ -1,7 +1,4 @@
-<div id="loading" class="overlay hide">
-  <img src="https://media0.giphy.com/media/4NpH0k494YKL4oxIeQ/source.gif" alt="loading...">
-  <h1 class="load-msg"></h1>
-</div>
+{{> loader}}
 <div class="container">
   <div class="jumbotron text-center" id="home-jumbotron">
     <h1 class="display-6" id="appTitle">KEBÄB</h1>
@@ -38,22 +35,46 @@
 
       $.post("/api/user", user, function (response) {
         window.localStorage.setItem("gameid", response.gameid);
+        window.localStorage.setItem("username", response.username);
         window.localStorage.setItem("userid", response.userid);
 
-        if (response.status) {
-          $("#loading .load-msg").text("");
-          $("#loading").addClass("hide");
-          // start game redirect user to question page
-          window.location.href = `/play/${response.gameid}`; 
-      } else {
+        if(response.status) {
 
-          $("#loading .load-msg").text("You are now in queue, waiting for more users to join.");
+          moveToGame(response)
+
+      } else {
+        var checker = setInterval(checkStatus, 1000);
+
+        $("#loading .load-msg").text("You are now in queue, waiting for more users to join.");
          // show message waiting for users
          // interval check status of userCount for game by id
+        function checkStatus(){
+          $.get(`/api/game/${response.gameid}/status`, function(gameStatus){
+            if(gameStatus){
+              // clear interval
+              clearInterval(checker)
+              moveToGame(response)
+            }
+          })
+        }
       }
       }) 
     }
   })
+
+  function moveToGame(response){
+      $("#loading .load-msg").text("");
+      $("#loading").addClass("hide");
+      // start game redirect user to question page
+      window.location.href = `/play/${response.gameid}`; 
+  }
+  $("#submit").keypress(function (e) {
+        if (e.which == 13) {
+            event.preventDefault();
+            getUserInput()
+            return false; 
+        }
+    });
 </script>
 
 {{!-- <script src="../../project2app/public/js/chat.js"></script> --}}
