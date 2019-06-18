@@ -1,3 +1,4 @@
 models/index.js
-node_modules
+project2/node_modules
+project2app/node_modules
 project2app/routes/apiRoutes.js
