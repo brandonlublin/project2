@@ -5,7 +5,7 @@ const op = Sequelize.Op;
 module.exports = function(app) {
   // Get all examples
   app.get("/api/trivia/:id", function(req, res) {
-    db.Questions.findOne({
+    db.Trivia.findOne({
       where: {
         id: req.params.id
       }
@@ -15,11 +15,11 @@ module.exports = function(app) {
   });
   // Create a new example
   app.post("/api/answers", function(req, res) {
-    db.Questions.create(req.body).then(function(userAnsDb) {
+    db.Trivia.create(req.body).then(function(userAnsDb) {
       res.json(userAnsDb);
     });
   });
-
+  
 function test1(trivia, cd ){
   let triviaIds = []; 
 

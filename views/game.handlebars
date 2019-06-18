@@ -5,19 +5,21 @@
         <h1 class="display-6" id="gameTitle">KEBÄB</h1>
         <p id="tagline">Fill in the blank below with your best fake answer!</p>
         <hr class="my-4">
-        {{#each trivia}}
+        {{#each questions}}
             <div class="question" id={{id}}>
-                {{#if @key}}
+                <p>{{id}}</p>
+                <p>{{triviaText}}</p>
+                {{!-- {{#if @key}}
                     <h1>{{triviaText}}</h1>
-                {{/if}}
+                {{/if}} --}}
             </div>
-        {{/each}}
-        <div class="container" id="smallInput">
+             <div class="container" id="smallInput">
             <form id="userAnswerForm">
-                <input id="userAnswer" type="text" placeholder="Enter your answer here" required />
+                <input id="userAnswer" data-id="{{id}}" type="text" placeholder="Enter your answer here" required />
                 <button id="submit" class="waves-effect waves-light btn">Submit</button>
             </form>
         </div>
+        {{/each}}
     </div>
 </div>
 
