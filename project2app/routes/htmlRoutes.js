@@ -11,7 +11,18 @@ module.exports = function (app) {
   });
 
   app.get('/gameResults', function(req, res) {
-    res.render('GameResults');
+    db.User.findAll({
+      where: {
+        attributes: [[sequelize.fn("max",sequelize.col("userScore"),"highestScore")]],
+        raw: true
+      }
+    }).then(function(dbResult){
+      var winner = {
+        username: dbResult.username 
+      }
+      res.render('GameResults', winner);
+    })
+
   });
 
   app.get('/play/:gameid/:questionid', function(req, res) {
