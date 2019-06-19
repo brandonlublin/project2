@@ -11,7 +11,7 @@ var io = require("socket.io")(server);
 // PORT for heroku or local
 var PORT = process.env.PORT || 3000;
 // separate port for socket
-// server.listen(80);
+server.listen(380);
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
